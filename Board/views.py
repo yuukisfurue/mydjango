@@ -1,18 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import TemplateView
+from .forms import BoardForm
 
-def index(request):
-    params = {
-        'title':'Board/Index',
-        'msg':'これは、サンプルで作ったページです。',
-        'goto':'next',
-    }
-    return render(request, 'Board/index.html', params)
+class BoardView(TemplateView):
+    
+    def __init__(self):
+        self.params = {
+            'title': 'Board',
+            'form': BoardForm(),
+            'result':None
+        }
+    
+    def get(self, request):
+        return render(request, 'Board/index.html', self.params)
 
-def next(request):
-    params = {
-        'title':'Board/Next',
-        'msg':'これは、もう１つのページです。',
-        'goto':'index',
-    }
-    return render(request, 'Board/index.html', params)
+    def post(self, request):
+        ch = request.POST.getlist('choice')
+        self.params['result'] = 'selected: ' + str(ch) + '.'
+        self.params['form'] = BoardForm(request.POST)
+        return render(request, 'Board/index.html', self.params)
