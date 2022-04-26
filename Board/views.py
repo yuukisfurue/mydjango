@@ -24,3 +24,16 @@ def create(request):
         'form': MemberForm(),
     }
     return render(request, 'Board/create.html', params)
+
+def edit(request, num):
+    obj = Member.objects.get(id=num)
+    if (request.method == 'POST'):
+        member = MemberForm(request.POST, instance=obj)
+        member.save()
+        return redirect(to='/Board')
+    params = {
+        'title': 'Board',
+        'id':num,
+        'form': MemberForm(instance=obj),
+    }
+    return render(request, 'Board/edit.html', params)
