@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Member
-from .forms import BoardForm
+from .forms import MemberForm
 
 def index(request):
     data = Member.objects.all()
@@ -14,17 +14,13 @@ def index(request):
 
 # create model
 def create(request):
-    params = {
-        'title': 'Board',
-        'form': BoardForm(),
-    }
     if (request.method == 'POST'):
-        name = request.POST['name']
-        age = request.POST['age']
-        gender = 'gender' in request.POST
-        pref = int(request.POST['pref'])
-        jyob = request.POST['jyob']
-        pojishon = request.POST['pojishon']
+        obj = Member()
+        member = MemberForm(request.POST, instance=obj)
         member.save()
         return redirect(to='/Board')
+    params = {
+        'title': 'Board',
+        'form': MemberForm(),
+    }
     return render(request, 'Board/create.html', params)
