@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    crossorigin="anonymous">
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary">{{title}}</h1>
+    <p class="h5 mt-4">{{message|safe}}</p>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="click">
+    </form>
+    <hr>
+    <table class="table">
+    <tr>
+            <th>ID</th>
+            <th>氏名</th>
+            <th>年齢</th>
+            <th>性別</th>
+            <th>出身地</th>
+            <th>職種</th>
+            <th>雇用形態</th>
+    </tr>
+    {% for item in data %}
+    <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.gender}}</td>
+            <td>{{item.pref}}</td>
+            <td>{{item.jyob}}</td>
+            <td>{{item.pojishon}}</td>
+            <td><a href="{% url 'edit' item.id %}">Edit</a></td>
+            <td><a href="{% url 'delete' item.id %}">Delete</a></td>
+    <tr>
+    {% endfor %}
+    </table>
+</body>
