@@ -1,0 +1,95 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    crossorigin="anonymous">
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary">査定会議出席者</h1>
+     <td><a href="{% url 'create' %}">新規登録</a></td>
+     <br><td><a href="{% url 'csv_export' %}" class="btn btn-primary">csv出力</a><td></br>
+        <table class="table">    
+            <tr>
+                <th>No.</th>
+                <th>名前</th>
+                <th>出身地</th>
+                <th>性別</th>
+                <th>雇用形態</th>
+                <th>業種</th>                
+                <th>配属部署</th>
+                <th>現住所</th>
+                <th>所属先</th>
+                <th>現役職</th>
+                <th>今年(万)</th>
+                <th>昨年(万)</th>
+             </tr>    
+             {% for item in data %}
+              <tr>
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.prefecture}}</td>
+              <td>{{item.gender}}</td>
+              <td>{{item.employmentstatus}}</td>
+              <td>{{item.company}}</td>
+              <td>{{item.jyob}}</td>
+              <td>{{item.stay}}</td>
+              <td>{{item.affiliation}}</td>
+              <td>{{item.postion}}</td>
+              <td>{{item.annual}}</td>
+              <td>{{item.lastyear}}</td>
+              <tr>
+             {% endfor %}
+         </table>
+        <ul class="pagination">
+    {% if data.has_previous %}
+    <li class="page-item">
+        <a class="page-link" href="{% url 'index' %}">
+            &laquo; first</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" 
+        href="{% url 'index' %}{{data.previous_page_number}}">
+            &laquo; prev</a>
+    </li>
+    {% else %}
+    <li class="page-item">
+        <a class="page-link">
+            &laquo; first</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link">
+            &laquo; prev</a>
+    </li>
+    {% endif %}
+    <li class="page-item">
+        <a class="page-link">
+        {{data.number}}/{{data.paginator.num_pages}}</a>
+    </li>
+    {% if data.has_next %}
+    <li class="page-item">
+        <a class="page-link" 
+        href="{% url 'index' %}{{data.next_page_number }}">
+            next &raquo;</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link" 
+        href="{% url 'index' %}{{data.paginator.num_pages}}">
+            last &raquo;</a>
+    </li>
+    {% else %}
+    <li class="page-item">
+        <a class="page-link">
+            next &raquo;</a>
+    </li>
+    <li class="page-item">
+        <a class="page-link">
+            last &raquo;</a>
+    </li>
+    {% endif %}
+  </ul>
+ </body>
+</html>

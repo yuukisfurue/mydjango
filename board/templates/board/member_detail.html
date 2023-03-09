@@ -1,0 +1,45 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    crossorigin="anonymous">
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary">
+        Members List</h1>
+    <table class="table">
+        <tr>
+            <th>id</th>
+            <th>{{object.id}}</th>
+        </tr>
+        <tr>
+            <th>name</th>
+            <td>{{object.name}}</td>
+        </tr>
+        <tr>
+            <th>prefecture</th>
+            <td>{{object.prefecture}}</td>
+        </tr>
+        <tr>
+            <th>gender</th>
+            <td>{{object.gender}}</td>
+        </tr>
+        <tr>
+            <th>company</th>
+            <td>{{object.company}}</td>
+        </tr>
+        <tr>
+            <th>jyob</th>
+            <td>{{object.jyob}}</td>
+        </tr>
+        <tr>
+            <th>employmentstatus</th>
+            <td>{{object.employmentstatus}}</td>
+        </tr>
+    </table>
+</body>
+</html>

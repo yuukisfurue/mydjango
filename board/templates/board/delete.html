@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>メンバー</title>
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    crossorigin="anonymous">
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary">メンバー</h1>
+    <p>※以下のレコードを削除します。</p>
+    <table class="table">
+        <tr><th>ID</th><td>{{obj.id}}</td></tr>
+        <tr><th>氏名</th><td>{{obj.name}}</td></tr>
+        <tr><th>住所</th><td>{{obj.prefecture}}</td></tr>
+        <tr><th>性別</th><td>{{obj.gender}}</td></tr>
+        <tr><th>業種</th><td>{{obj.company}}</td></tr>
+        <tr><th>部署</th><td>{{obj.jyob}}</td></tr>
+        <tr><th>役職</th><td>{{obj.employmentstatus}}</td></tr>
+        <form action="{% url 'delete' id %}" method="post">
+        {% csrf_token %}
+        <tr><th></th><td>
+            <input type="submit" value="click"
+                class="btn btn-primary">
+        </td></tr>
+        </form>
+    </table>
+</body>
+</html>
