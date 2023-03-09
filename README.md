@@ -1,4 +1,4 @@
-#mydjango プルダウンメニューとCSV
+#mydjango 
 
 models.py
 
