@@ -1,4 +1,4 @@
-#mydjango プルダウンメニューcsv
+#mydjango プルダウンメニューとCSV
 
 models.py
 
@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.validators import MinLengthValidator  #☆
 
+#プルダウンメニュー
 class Member(models.Model):
     name = models.CharField(verbose_name="名前",max_length=100)
     prefecture  = models.CharField(verbose_name="出身地",choices=settings.PREFECTURES,max_length=100)
@@ -25,6 +26,7 @@ class Member(models.Model):
         return '<Member:id=' + str(self.id) + ', ' + \
             self.name + '(' + str(self.name) + ')>'
 
+#CSV
 class Plofile(models.Model):            
     name = models.CharField(verbose_name="名前",max_length=100)
     prefecture  = models.CharField(verbose_name="出身地",choices=settings.PREFECTURES,max_length=100)
